@@ -1,8 +1,5 @@
 from flask import Flask, render_template, jsonify
-from openai import OpenAIAPI
-
-# Assuming you have already initialized the OpenAI API key
-client = OpenAIAPI(api_key='your_api_key')
+import random
 
 app = Flask(__name__, template_folder='templates')
 
@@ -13,7 +10,7 @@ def index():
 @app.route('/generate/<content_type>')
 def generate_content(content_type):
     prompt = get_prompt(content_type)
-    generated_content = generate_with_openai(prompt)
+    generated_content = generate_mock_content(content_type)
     return jsonify({'content': generated_content})
 
 def get_prompt(content_type):
@@ -25,13 +22,16 @@ def get_prompt(content_type):
     }
     return prompts.get(content_type, 'Invalid content type.')
 
-def generate_with_openai(prompt):
-    response = client.Completion.create(
-        engine="text-davinci-003",
-        prompt=prompt,
-        max_tokens=200
-    )
-    return response['choices'][0]['text']
+def generate_mock_content(content_type):
+    # Placeholder content generation
+    if content_type == 'article':
+        return "This is a sample article content."
+    elif content_type == 'music':
+        return "This is a sample music piece."
+    elif content_type == 'art':
+        return "This is a sample visual artwork."
+    else:
+        return "Invalid content type."
 
 if __name__ == '__main__':
     app.run(debug=True)

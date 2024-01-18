@@ -4,28 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Content Creation</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>AI Content Creation Tool</h1>
-    <label for="content-type">Select Content Type:</label>
-    <select id="content-type">
-        <option value="article">Article</option>
-        <option value="music">Music</option>
-        <option value="art">Visual Art</option>
-    </select>
-    <button onclick="generateContent()">Generate Content</button>
-    <div id="result"></div>
+    <div class="container">
+        <header>
+            <h1>AI Content Creation Tool</h1>
+        </header>
+        <main>
+            <label for="content-type">Select Content Type:</label>
+            <select id="content-type">
+                <option value="article">Article</option>
+                <option value="music">Music</option>
+                <option value="art">Visual Art</option>
+            </select>
+            <button onclick="generateContent()">Generate Content</button>
+            <div id="result"></div>
+        </main>
+    </div>
 
-    <script>
-        function generateContent() {
-            const contentType = document.getElementById("content-type").value;
-            fetch(`/generate/${contentType}`)
-                .then(response => response.json())
-                .then(data => {
-                    document.getElementById("result").innerText = data.content;
-                })
-                .catch(error => console.error('Error:', error));
-        }
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
